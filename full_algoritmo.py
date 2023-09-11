@@ -65,6 +65,8 @@ def menor_caminho_forca_bruta(cidades):
 
     return melhor_caminho, menor_distancia, num_execucoes
 
+
+
 # Função para atualizar o feromônio
 def atualizar_feromonio(trilhas_formigas, feromonio, taxa_evaporacao):
     for i in range(len(feromonio)):
