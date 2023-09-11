@@ -36,9 +36,9 @@ def menor_caminho_forca_bruta(cidades):
     todos_caminhos = []
     num_execucoes = 0  # Contador de execuções
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(x_cidades, y_cidades, "bo", label="Cidades")
-    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.scatter(x_cidades, y_cidades, c='blue', label="Cidades")
+
     for permutacao in todas_permutacoes:
         volta_caixeiro = permutacao + (permutacao[0],)
         distancia_atual = calcular_distancia_total(volta_caixeiro, cidades)
@@ -46,13 +46,17 @@ def menor_caminho_forca_bruta(cidades):
         num_execucoes += 1
 
         # Atualizar o gráfico para mostrar o caminho atual
-        plt.clf()  # Limpar o gráfico
-        plt.plot(x_cidades, y_cidades, "bo", label="Cidades")
+        ax.clear()  # Limpar o gráfico
+        ax.scatter(x_cidades, y_cidades, c='blue', label="Cidades")
 
         for i in range(len(volta_caixeiro) - 1):
-            plt.plot([x_cidades[volta_caixeiro[i]], x_cidades[volta_caixeiro[i + 1]]],
-                     [y_cidades[volta_caixeiro[i]], y_cidades[volta_caixeiro[i + 1]]], "r-", linewidth=2)
+            ax.plot([x_cidades[volta_caixeiro[i]], x_cidades[volta_caixeiro[i + 1]]],
+                    [y_cidades[volta_caixeiro[i]], y_cidades[volta_caixeiro[i + 1]]], 'r-', linewidth=2)
         
+        ax.set_xlabel('Coordenada X')
+        ax.set_ylabel('Coordenada Y')
+        ax.set_title(f"Distância: {distancia_atual:.2f}, Tentativas: {num_execucoes}")
+        ax.grid()
         plt.pause(0.01)  # Pausa para atualizar o gráfico
         plt.draw()  # Redesenhar o gráfico
 
@@ -64,8 +68,6 @@ def menor_caminho_forca_bruta(cidades):
     plt.show()  # Mostrar o gráfico final
 
     return melhor_caminho, menor_distancia, num_execucoes
-
-
 
 # Função para atualizar o feromônio
 def atualizar_feromonio(trilhas_formigas, feromonio, taxa_evaporacao):
