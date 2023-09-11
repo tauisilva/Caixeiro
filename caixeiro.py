@@ -101,6 +101,3 @@ plt.legend()
 # Mostrar o gráfico
 plt.tight_layout()
 plt.show()
-
-
-
